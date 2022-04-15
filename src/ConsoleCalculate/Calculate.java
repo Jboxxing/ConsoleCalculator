@@ -1,3 +1,15 @@
+// For testing purposes:
+
+// - Tested for invalid or missing operator inputs
+//   --> Input of "1111", Output of "Error, missing a valid operator or operands."
+//   --> Input of "1+", Output of "Error, missing a valid operator or operands."
+//   --> Input of "+1", Output of "Error, missing a valid operator or operands."
+
+// - Tested for invalid or missing operand inputs
+//   --> Input of "w+1", Output of "Left operand is not a valid integer."
+//   --> Input of "1+w", Output of "Right operand is not a valid integer."
+//   --> Input of "w+w", Output of "Left operand is not a valid integer.\n" + "Right operand is not a valid integer."
+
 package ConsoleCalculate;
 
 import java.util.Scanner;
@@ -36,9 +48,13 @@ public class Calculate
 				right.add(equation[i]);
 		}
 		
-		// Now that the left operands, the operator, and the right operands are identified, perform the correct
-		// calculations.
-		performCalculations(userInput.concat(" = "), left, right, operator);
+		// If the left operands, the operator, and the right operands are identified, perform the correct
+		// calculations. Otherwise, notify user that something is missing (operator or operand) or invalid (operator).
+		// Invalid operands will be checked later (in performCalculations).
+		if (operator != ' ' && !left.isEmpty() && !right.isEmpty())
+			performCalculations(userInput.concat(" = "), left, right, operator);
+		else
+			System.out.println("Error, missing a valid operator or operands.");
 	}
 	
 	public void performCalculations(String input, ArrayList<Character> left, ArrayList<Character> right, char operator)
@@ -59,24 +75,45 @@ public class Calculate
 			rightOperands.append(ch);
 		}
 		
-		int leftO = Integer.parseInt(leftOperands.toString());
-		int rightO = Integer.parseInt(rightOperands.toString());
+		int leftO = 0;
+		int rightO = 0;
+		// Ensures that the left and right operands are valid integers before proceeding to make calculations.
+		// **** Possibly better to check for integer validity of the operands before entering this method. ****
+		try
+		{
+			leftO = Integer.parseInt(leftOperands.toString());
+		}
+		catch (NumberFormatException e)
+		{
+			System.out.println("Left operand is not a valid integer.");
+		}
+		try
+		{
+			rightO = Integer.parseInt(rightOperands.toString());
+		}
+		catch (NumberFormatException e)
+		{
+			System.out.println("Right operand is not a valid integer.");
+		}
 		
 		// The left and right operands are used in the calculation determined by the value of the operator.
-		switch (operator)
+		if (leftO != 0 && rightO != 0)
 		{
-		case '+':
-			System.out.println(input + (leftO + rightO));
-			break;
-		case '-':
-			System.out.println(input + (leftO - rightO));
-			break;
-		case '*':
-			System.out.println(input + (leftO * rightO));
-			break;
-		case '/':
-			System.out.println(input + (leftO / rightO));
-			break;
+			switch (operator)
+			{
+			case '+':
+				System.out.println(input + (leftO + rightO));
+				break;
+			case '-':
+				System.out.println(input + (leftO - rightO));
+				break;
+			case '*':
+				System.out.println(input + (leftO * rightO));
+				break;
+			case '/':
+				System.out.println(input + (leftO / rightO));
+				break;
+			}
 		}
 	}
 	
