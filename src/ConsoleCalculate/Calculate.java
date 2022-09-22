@@ -4,6 +4,8 @@
 //   --> Input of "1111", Output of "Error, missing a valid operator or operands."
 //   --> Input of "1+", Output of "Error, missing a valid operator or operands."
 //   --> Input of "+1", Output of "Error, missing a valid operator or operands."
+//   --> Input of "1++1", Output of "Invalid equation, multiple operators detected."
+//   --> Input of "1+1+", Output of "Invalid equation, multiple operators detected."
 
 // - Tested for invalid or missing operand inputs
 //   --> Input of "w+1", Output of "Left operand is not a valid integer."
@@ -39,6 +41,11 @@ public class Calculate
 		{
 			if (equation[i] == '+' || equation[i] == '-' || equation[i] == '*' || equation[i] == '/')
 			{
+				if (operator != ' ')
+				{
+					System.out.println("Invalid equation, multiple operators detected.");
+					return;
+				}
 				operator = equation[i];
 				isLeft = false;
 			}
@@ -82,6 +89,7 @@ public class Calculate
 		try
 		{
 			leftO = Integer.parseInt(leftOperands.toString());
+			System.out.println("Left operand: " + leftO);
 		}
 		catch (NumberFormatException e)
 		{
@@ -90,6 +98,7 @@ public class Calculate
 		try
 		{
 			rightO = Integer.parseInt(rightOperands.toString());
+			System.out.println("Right operand: " + rightO);
 		}
 		catch (NumberFormatException e)
 		{
