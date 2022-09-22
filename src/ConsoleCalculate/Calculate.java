@@ -89,7 +89,6 @@ public class Calculate
 		try
 		{
 			leftO = Integer.parseInt(leftOperands.toString());
-			System.out.println("Left operand: " + leftO);
 		}
 		catch (NumberFormatException e)
 		{
@@ -98,7 +97,6 @@ public class Calculate
 		try
 		{
 			rightO = Integer.parseInt(rightOperands.toString());
-			System.out.println("Right operand: " + rightO);
 		}
 		catch (NumberFormatException e)
 		{
