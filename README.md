@@ -11,6 +11,8 @@
 - Input of "1111", Output of "Error, missing a valid operator or operands."
 - Input of "1+", Output of "Error, missing a valid operator or operands."
 - Input of "+1", Output of "Error, missing a valid operator or operands."
+- Input of "1++1", Output of "Invalid equation, multiple operators detected."
+- Input of "1+1+", Output of "Invalid equation, multiple operators detected."
 
 **Tested for invalid or missing operand inputs**
 - Input of "w+1", Output of "Left operand is not a valid integer."
